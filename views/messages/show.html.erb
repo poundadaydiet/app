@@ -1,0 +1,14 @@
+<article>
+<p id="notice"><%= notice %></p>
+
+<h3>Subject: <%= @message.subject %></h3>
+<h3>Message:</h3>
+<p><%= @liquidtemplate.html_safe %></p>
+
+<%= link_to 'Back', messages_path %>
+</article>
+
+<aside>
+        <h3>Rocco says:</h3>
+        Here I will check in with you with messages.
+</aside>

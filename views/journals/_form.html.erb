@@ -1,0 +1,249 @@
+<%= form_for(@journal) do |f| %>
+  <% if @journal.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(@journal.errors.count, "error") %> prohibited this journal from being saved:</h3>
+
+      <ul>
+      <% @journal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>	
+      </ul>
+    </div>
+  <% end %>
+  
+  <script>
+  $(document).ready(function() {
+      $("#exercise").change(function() {
+          if ($(this).val() != 'true') {
+              $("#journal_exercisetime").attr("disabled", "disabled");
+              $("#journal_exercisetype").attr("disabled", "disabled");
+	      $("#journal_exerciselength").attr("disabled", "disabled");
+	      $("#journal_how_tired_before").attr("disabled", "disabled");
+	      $("#journal_how_tired_after").attr("disabled", "disabled");
+
+              $("#journal_exercisetime").addClass("disabled", 0);
+	      $("#journal_exercisetype").addClass("disabled", 0);
+	      $("#journal_exerciselength").addClass("disabled", 0);
+	      $("#journal_how_tired_before").addClass("disabled", 0);
+	      $("#journal_how_tired_after").addClass("disabled", 0);
+	  }
+          else {
+              $("#journal_exercisetime").removeAttr("disabled");
+              $("#journal_exercisetype").removeAttr("disabled");
+              $("#journal_exerciselength").removeAttr("disabled");
+              $("#journal_how_tired_before").removeAttr("disabled");
+              $("#journal_how_tired_after").removeAttr("disabled");
+
+	      $("#journal_exercisetime").removeClass("disabled");
+	      $("#journal_exercisetype").removeClass("disabled");
+	      $("#journal_exerciselength").removeClass("disabled");
+	      $("#journal_how_tired_before").removeClass("disabled");
+	      $("#journal_how_tired_after").removeClass("disabled");
+			  
+	  }
+      });
+  });
+  </script>
+  
+  <script>
+  $(function() {
+    $( "#accordion" ).accordion({collapsible: true, heightStyle: "content"});
+  });
+  </script>
+
+  <div id="accordion">
+  <h3>Exercise</h3>
+  <div class="section1">
+  <div class="field">
+            <%= f.label :journal_date, "What date is this journal for?" %>
+            <%= f.date_select(:journal_date, :order => [:month, :day], :start_year => 1940, :end_year => 1997) %>
+          </div>
+  <div class="field">
+    <%= f.label "Did you exercise today?" %>
+    <%= select_tag(:exercise, options_for_select([['Yes', "true"], ['No', "false"]])) %>
+  </div>
+  <div class="field">
+    <%= f.label "Around what time?" %>
+    <%= f.time_select :exercisetime, {:minute_step => 15} %>
+  </div>
+  <div class="field">
+    <%= f.label "What type of exercise?" %>
+    <%= f.text_field :exercisetype, :placeholder => "What type of exercise?" %>
+  </div>
+  <div class="field">
+    <%= f.label "For how many minutes?" %>
+    <%= f.number_field :exerciselength, :placeholder => "Minutes" %>
+  </div>
+  <div class="field">
+    <%= f.label :how_tired_before, "How tired were you before exercising?" %>
+    <%= f.text_field :how_tired_before, :placeholder => "Scale of 1 to 10?" %>
+  </div>
+  <div class="field">
+    <%= f.label :how_tired_after, "How tired were you after exercising?" %>
+    <%= f.text_field :how_tired_after, :placeholder => "Did you push yourself?" %>
+  </div>
+  </div>
+  
+  <h3>Vitals</h3>
+  <div id="section1.5">
+  <div class="field">
+    <%= f.label :active_heart_rate %>
+    <%= f.number_field :active_heart_rate %>
+  </div>
+  <div class="field">
+    <%= f.label :resting_heart_rate %>
+    <%= f.number_field :resting_heart_rate %>
+  </div>
+  <div class="field">
+    <%= f.label :time_to_resting, "How many minutes did it take to get back to your resting heart rate?" %>
+    <%= f.number_field :time_to_resting %>
+  </div>
+  </div>
+
+  <h3>Measurements</h3>
+  <div id="section2">
+  <div class="field">
+    <%= f.label :weight %>
+    <%= f.number_field :weight %>
+  </div>
+<div class="field">
+    <%= f.label :waist %>
+    <%= f.number_field :waist %>
+  </div>
+  <div class="field">
+    <%= f.label :chest %>
+    <%= f.number_field :chest %>
+  </div>
+  <div class="field">
+    <%= f.label :hips %>
+    <%= f.number_field :hips %>
+  </div>
+  <div class="field">
+    <%= f.label :bmi, "BMI" %>
+    <%= f.number_field :bmi %>
+  </div>
+  </div>
+  
+  <h3>Breakfast</h3>
+  <div id="breakfast">
+  <div class="field">
+    <%= f.label :breakfast_consumed, "What recipes did you eat?" %>
+    <%= f.text_field :breakfast_consumed %>
+  </div>
+  <div class="field">
+    <%= f.label :breakfast_quantity, "How much did you eat?" %>
+    <%= f.text_field :breakfast_quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :breakfast_full, "Did you feel full?" %>
+    <%= select_tag(:breakfast_full, options_for_select([['Yes', "Yes"], ['No', "No"]])) %>
+  </div>
+  <div class="field">
+    <%= f.label :breakfast_enjoy, "Did you enjoy the recipe?" %>
+    <%= select_tag(:breakfast_enjoy, options_for_select([['Yes', "Yes"], ['No', "No"]])) %>
+  </div>
+  </div>  
+
+  <h3>Snack One</h3>
+  <div id="snackone">
+  <div class="field">
+    <%= f.label :snackone_consumed, "What recipes did you eat?" %>
+    <%= f.text_field :snackone_consumed %>
+  </div>
+  <div class="field">
+    <%= f.label :snackone_quantity, "How much did you eat?" %>
+    <%= f.text_field :snackone_quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :snackone_full, "Did you feel full?" %>
+    <%= select_tag(:snackone_full, options_for_select([['Yes', "Yes"], ['No', "No"]])) %>
+  </div>
+  <div class="field">
+    <%= f.label :snackone_enjoy, "Did you enjoy the recipe?" %>
+    <%= select_tag(:snackone_enjoy, options_for_select([['Yes', "Yes"], ['No', "No"]])) %>
+  </div>
+  </div>  
+
+  <h3>Lunch</h3>
+  <div id="lunch">
+  <div class="field">
+    <%= f.label :lunch_consumed, "What recipes did you eat?" %>
+    <%= f.text_field :lunch_consumed %>
+  </div>
+  <div class="field">
+    <%= f.label :lunch_quantity, "How much did you eat?" %>
+    <%= f.text_field :lunch_quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :lunch_full, "Did you feel full?" %>
+    <%= select_tag(:lunch_full, options_for_select([['Yes', "Yes"], ['No', "No"]])) %>
+  </div>
+  <div class="field">
+    <%= f.label :lunch_enjoy, "Did you enjoy the recipe?" %>
+    <%= select_tag(:lunch_enjoy, options_for_select([['Yes', "Yes"], ['No', "No"]])) %>
+  </div>
+  </div>
+
+  <h3>Snack Two</h3>
+  <div id="snacktwo">
+  <div class="field">
+    <%= f.label :snacktwo_consumed, "What recipes did you eat?" %>
+    <%= f.text_field :snacktwo_consumed %>
+  </div>
+  <div class="field">
+    <%= f.label :snacktwo_quantity, "How much did you eat?" %>
+    <%= f.text_field :snacktwo_quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :snacktwo_full, "Did you feel full?" %>
+    <%= select_tag(:snacktwo_full, options_for_select([['Yes', "Yes"], ['No', "No"]])) %>
+  </div>
+  <div class="field">
+    <%= f.label :snacktwo_enjoy, "Did you enjoy the recipe?" %>
+    <%= select_tag(:snacktwo_enjoy, options_for_select([['Yes', "Yes"], ['No', "No"]])) %>
+  </div>
+  </div>  
+
+  <h3>Dinner</h3>
+  <div id="dinner">
+  <div class="field">
+    <%= f.label :dinner_consumed, "What recipes did you eat?" %>
+    <%= f.text_field :dinner_consumed %>
+  </div>
+  <div class="field">
+    <%= f.label :dinner_quantity, "How much did you eat?" %>
+    <%= f.text_field :dinner_quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :dinner_full, "Did you feel full?" %>
+    <%= select_tag(:dinner_full, options_for_select([['Yes', "Yes"], ['No', "No"]])) %>
+  </div>
+  <div class="field">
+    <%= f.label :dinner_enjoy, "Did you enjoy the recipe?" %>
+    <%= select_tag(:dinner_enjoy, options_for_select([['Yes', "Yes"], ['No', "No"]])) %>
+  </div>
+  </div>    
+
+  <h3>Additional Information</h3>
+  <div id="additionalinformation">
+  <div class="field">
+    <%= f.label :consumed_all_food, "Did you finish all the of the food provided?" %>
+    <%= select_tag(:consumed_all_food, options_for_select([['Yes', "Yes"], ['No', "No"]])) %>
+  </div>
+  <div class="field">
+    <%= f.label :other_food_type, "Did you eat anything else? If so, what was it?" %>
+    <%= f.text_field :other_food_type %>
+  </div>
+  <div class="field">
+    <%= f.label :glasses_of_water, "How many glasses of water did you drink?" %>
+    <%= f.number_field :glasses_of_water %>
+  </div>
+  </div>    
+
+</div>
+<br/>
+<div class="actions">
+  <%= f.submit "Save Journal", :class => "btn btn-large"  %>
+</div>
+
+<% end %>

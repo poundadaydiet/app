@@ -1,0 +1,237 @@
+<%= form_for(@client) do |f| %>
+  <% if @client.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
+
+      <ul>
+      <% @client.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <input id="client_email" name="client[email]" type="hidden" value="<%= current_user.email %>" />
+
+  <script>
+  $(document).ready(function() {
+      $("#exercise").change(function() {
+          if ($(this).val() != 'true') {
+              $("#client_exercisefrequency").attr("disabled", "disabled");
+	      $("#client_exercisefrequency").addClass("disabled", 0);
+              $("#client_exercisetype").attr("disabled", "disabled");
+	      $("#client_exercisetype").addClass("disabled", 0);
+	  }
+          else {
+              $("#client_exercisefrequency").removeAttr("disabled");
+	      $("#client_exercisefrequency").removeClass("disabled");
+              $("#client_exercisetype").removeAttr("disabled");
+	      $("#client_exercisetype").removeClass("disabled");
+                          
+	  }
+      });
+  });
+  $(document).ready(function() {
+      $("#male").hide();
+      $("#client_gender").change(function() {
+          if ($(this).val() == 'male') {
+              $("#female").hide();
+              $("#male").show();
+	  }
+          else {
+              $("#male").hide();
+              $("#female").show();
+	  }
+      });
+  });
+  </script>
+
+  <script>
+  $(function() {
+    $( "#accordion" ).accordion({collapsible: true, heightStyle: "content"});
+  });
+  </script>
+
+  <div id="accordion" style="">
+  <h3>Vitals</h3>
+  <div class="section1">
+	  <div class="field">
+	    <%= f.label :firstname, "First Name" %><br />
+	    <%= f.text_field :firstname %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :lastname, "Last Name" %><br />
+	    <%= f.text_field :lastname %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :gender, "What is your gender?" %><br />
+	    <%= f.select(:gender, options_for_select([['Female', "female"], ['Male', "male"]])) %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :age, "What is your age?" %><br />
+	    <%= f.text_field :age %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :dateofbirth, "What is your date of birth?" %><br />
+	    <%= f.date_select(:dateofbirth, :order => [:month, :day, :year], :start_year => 1940, :end_year => 1997) %>
+	  </div>
+  </div>
+
+  <h3>Measurements</h3>
+  <div class="section4">
+  <div class="field">
+	    <%= f.label :starting_weight, "What is your current weight?" %><br />
+	    <%= f.number_field :starting_weight %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :goal_weight, "What is your target weight?" %><br />
+	    <%= f.number_field :goal_weight %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :height, "How tall are you (in inches)?" %><br />
+	    <%= f.number_field :height %>
+	  </div>
+	  <hr class="yellow" width="80%">
+	  <div class="field">
+	    <%= f.label :starting_bmi, "What is your BMI?" %><br />
+	    <%= f.number_field :starting_bmi %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :starting_bmr, "What is your BMR?" %><br />
+	    <%= f.number_field :starting_bmr %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :starting_bodyfat, "What is your Body Fat %?" %><br />
+	    <%= f.number_field :starting_bodyfat %>
+	  </div>
+	  <hr class="yellow" width="80%">
+	  <div class="field">
+	    <%= f.label :starting_waist, "Waist" %><br />
+	    <%= f.number_field :starting_waist %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :starting_chest, "Chest" %><br />
+	    <%= f.number_field :starting_chest %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :starting_hips, "Hips" %><br />
+	    <%= f.number_field :starting_hips %>
+	  </div>
+	  <hr class="yellow" width="80%">
+	  <div class="field">
+	    <%= f.label :starting_pantsize, "What is your pant size?" %><br />
+	    <%= f.number_field :starting_pantsize %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :goal_pantsize, "What is your goal pant size?" %><br />
+	    <%= f.number_field :goal_pant_size %>
+	  </div>
+				<div id="female">
+	  <div class="field">
+	    <%= f.label :starting_dresssize, "What is your dress size?" %><br />
+	    <%= f.number_field :starting_dresssize %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :goal_dresssize, "What is your goal dress size?" %><br />
+	    <%= f.number_field :goal_dresssize %>
+	  </div>
+          </div>
+			<div id="male">
+	  <div class="field">
+	    <%= f.label :starting_jacket_size, "What is your jacket size?" %><br />
+	    <%= f.number_field :starting_jacket_size %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :goal_dresssize, "What is your goal jacket size?" %><br />
+	    <%= f.number_field :goal_dresssize %>
+	  </div>
+          </div>
+  </div>
+
+  <h3>Fitness</h3>
+  <div class="section2">
+	  <div class="field">
+	    <%= f.label :exercise, "Do you exercise?" %><br />
+	    <%= select_tag(:exercise, options_for_select([['Yes', "true"], ['No', "false"]])) %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :exercisefrequency, "How often do you exercise?" %><br />
+	    <%= f.text_field :exercisefrequency %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :exercisetype, "How do you exercise?" %><br />
+	    <%= f.text_field :exercisetype %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :smoker, "Do you smoke?" %><br />
+	    <%= f.select(:smoker, options_for_select([['No', "false"], ['Yes', "true"]])) %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :water, "How much water do you drink per day?" %><br />
+	    <%= f.text_field :water %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :medical_conditions, "Please list any medical conditions." %><br />
+	    <%= f.text_field :medical_conditions %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :medications, "Please list any medications." %><br />
+	    <%= f.text_field :medications %>
+	  </div>
+  </div>
+
+
+  <h3>Food Preferences</h3>
+  <div class="section3">
+	  <div class="field">
+	    <%= f.label :favorite_food, "What are some of your favorite foods?" %><br />
+	    <%= f.text_field :favorite_food %>
+	  </div>
+	 <div class="field">
+	    <%= f.label :favorite_lunch, "What type of foods do you eat for lunch?" %><br />
+	    <%= f.text_field :favorite_lunch %>
+	  </div>
+	 <div class="field">
+	    <%= f.label :favorite_breakfast, "What are your favorite breakfasts?" %><br />
+	    <%= f.text_field :favorite_breakfast %>
+	  </div>
+	 <div class="field">
+	    <%= f.label :favoritefood_snacks, "What are some of your favorite snacks?" %><br />
+	    <%= f.text_field :favorite_snacks %>
+	  </div>
+	 <div class="field">
+	    <%= f.label :favorite_salad, "Do you have a favorite salad?" %><br />
+	    <%= f.text_field :favorite_salad %>
+	  </div>
+	 <div class="field">
+	    <%= f.label :favorite_drinks, "What are some of your favorite drinks?" %><br />
+	    <%= f.text_field :favorite_drinks %>
+	  </div>
+	 <div class="field">
+	    <%= f.label :food_likes, "Tell us about any other kinds of foods you love!" %><br />
+	    <%= f.text_field :food_likes %>
+	  </div>
+	 <div class="field">
+	    <%= f.label :food_dislikes, "Also, let us know if there are foods you do not like." %><br />
+	    <%= f.text_field :food_dislikes %>
+	  </div>
+	 <div class="field">
+	    <%= f.label :food_dislikes, "What are your favorite restaurants?" %><br />
+	    <%= f.text_field :favorite_restaurants %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :cook, "Do you cook?" %><br />
+	    <%= select_tag(:cook, options_for_select([['No', "false"], ['Yes', "true"]])) %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :like_coffee_tea, "Do you like coffee and/or tea?" %><br />
+	    <%= select_tag(:cook, options_for_select([ ['Coffee', "coffee"], ['Tea', "tea"], ["Both", "both"], ["Neither", "neither"] ] )) %>
+	  </div>
+
+  </div>
+  </div>
+<br/>
+	  <div class="actions">
+	    <%= f.submit "Save Profile" %>
+	  </div>
+<% end %>

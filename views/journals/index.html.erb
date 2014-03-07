@@ -1,0 +1,42 @@
+<article>
+<div style=
+    "border-top: 1px solid #99CC33; border-bottom: 1px solid #99CC33; padding-top: .5em; padding-bottom: .5em; margin-bottom: 1em; display:block;">
+    <h4 class="fancyheading" style="margin-bottom: 0px;">Your Weight Loss Journal</h4></div>
+
+<br/>
+You can update your past journal entries below to fill in missing information, or  <%= link_to 'Start a new journal', new_journal_path, :class => "btn" %>
+<hr class="yellow">
+
+    <table class="table table-striped">
+    <tr class="header">
+    <th>Date</th>
+    <th>Exercise</th>
+    <th>Weight</th>
+    <th>Waist</th>
+    <th>Chest</th>
+    <th>Hips</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @journals.each do |journal| %>
+  <tr class="<%= cycle("odd", "even") %>">
+    <td><%= journal.journal_date.to_s(:short) %></td>
+    <td><%= journal.exercisetype %></td>
+    <td><%= journal.weight %></td>
+    <td><%= journal.waist %></td>
+    <td><%= journal.chest %></td>
+    <td><%= journal.hips %></td>
+    <td><%= link_to 'Update', edit_journal_path(journal), :class => "btn"  %></td>
+    <td><%= link_to 'Delete', journal, method: :delete, :class => "btn", data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+<hr class="yellow">
+</article>
+
+<aside>
+    <h4 style="text-align: center">Rocco Says:</h4>
+<p>Your journal is a very important tool for me, it's where I learn how to customize your meal plan to maximize weight loss and your eating pleasure.</p>
+<p>If you can't finish it all at once, come back later in the day and update today's entry!</p>
+</aside>

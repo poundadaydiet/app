@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Exercise:</b>
+  <%= @journal.exercise %>
+</p>
+
+<p>
+  <b>Exercisetime:</b>
+  <%= @journal.exercisetime %>
+</p>
+
+<p>
+  <b>Exercisetype:</b>
+  <%= @journal.exercisetype %>
+</p>
+
+<p>
+  <b>Exerciselength:</b>
+  <%= @journal.exerciselength %>
+</p>
+
+<p>
+  <b>Waist:</b>
+  <%= @journal.waist %>
+</p>
+
+<p>
+  <b>Chest:</b>
+  <%= @journal.chest %>
+</p>
+
+<p>
+  <b>Hips:</b>
+  <%= @journal.hips %>
+</p>
+
+
+<%= link_to 'Edit', edit_journal_path(@journal) %> |
+<%= link_to 'Back', journals_path %>

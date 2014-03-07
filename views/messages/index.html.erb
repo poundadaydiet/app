@@ -1,0 +1,28 @@
+<article>
+<div style=
+    "border-top: 1px solid #99CC33; border-bottom: 1px solid #99CC33; padding-top: .5em; padding-bottom: .5em; margin-bottom: 1em; display:block;">
+    <h4 class="fancyheading" style="margin-bottom: 0px;">Messages</h4></div>
+
+<table class="table table-striped">
+  <tr>
+    <th>Subject</th>
+    <th>Date</th>
+  </tr>
+
+<% @messages.each do |message| %>
+  <tr>
+    <td><%= link_to message.subject, message %></td>
+    <td><%= message.created_at.to_s(:short) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+</article>
+
+<aside>
+   <h4 style="text-align: center">Rocco Says:</h4>
+	Here I will check in with you with messages.
+</aside>
+

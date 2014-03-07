@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @message_template.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @message_template.description %>
+</p>
+
+<p>
+  <b>Subject:</b>
+  <%= @message_template.subject %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @message_template.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_message_template_path(@message_template) %> |
+<%= link_to 'Back', message_templates_path %>

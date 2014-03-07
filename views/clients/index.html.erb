@@ -1,0 +1,37 @@
+
+  <article>
+    <div style=
+    "border-top: 1px solid #99CC33; border-bottom: 1px solid #99CC33; padding-top: .5em; padding-bottom: .5em; margin-bottom: 1em; display:block;">
+    <h4 class="fancyheading">Happy to see you here
+    <%= @client.firstname.capitalize %>!</h4>
+    </div>
+
+<div class="text-center">
+    <h5>You're doing great and I know we can reach your goals! Now what?</h5>
+   <%= link_to "Start a new daily journal", {:controller => "journals", :action => "new" }, :class => "btn btn-large" %>
+
+<br>
+<br>
+
+    <%= link_to "Update your profile", {:controller => "clients", :id => @client, :action => "edit"}, :class => "btn btn-large" %>
+<br/>
+</div>
+
+<br/>
+
+<hr class="yellow">
+      </article>
+
+  <aside>
+    <h4 style="text-align: center">Rocco Says:</h4>
+
+<p>Welcome to Now Eat This Diet - Everyday At Home, where healthy and delicious are NOT mutually exclusive.</p>
+
+<p>I've prepared all the food all you have to do is eat it all and keep your heart rate in the FBZ (Fat Burning Zone). Together we'll lose up to a pound a day.</p>
+    
+<span id=
+    "signature"><img src="/rdsig.gif" width="119" height="89"
+    style="margin-left: auto; margin-right: auto; display: block;"></span>
+  </aside>
+
+

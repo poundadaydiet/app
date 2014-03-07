@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Firstname:</b>
+  <%= @client.firstname %>
+</p>
+
+<p>
+  <b>Lastname:</b>
+  <%= @client.lastname %>
+</p>
+
+<p>
+  <b>Startingweight:</b>
+  <%= @client.startingweight %>
+</p>
+
+<p>
+  <b>Currentweight:</b>
+  <%= @client.currentweight %>
+</p>
+
+<p>
+  <b>Favoritefood:</b>
+  <%= @client.favoritefood %>
+</p>
+
+
+<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Back', clients_path %>

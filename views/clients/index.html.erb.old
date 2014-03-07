@@ -1,0 +1,23 @@
+<% if @client.firstname %>
+<h2>Welcome, <%= @client.firstname %>!</h2>
+
+<p>You have no waiting messages.</p>
+
+<%= link_to "Start a new journal.", :controller => "journals", :action => "new" %>
+
+<br/>
+<%else%>
+<p>Hi, it looks like you are new here! We just need you to answer some short questions to get started.</p>
+
+<%= form_for @client do |client_form| %>
+  First Name:
+  <%= client_form.text_field :firstname %>
+  <br/>
+  Last Name:
+  <%= client_form.text_field :lastname %>
+  <input id="client_email" name="client[email]" type="hidden" value="<%= current_user.email %>" />
+  <%= submit_tag("Submit") %>
+<% end %>
+<%end%>  
+</form>
+<br/>

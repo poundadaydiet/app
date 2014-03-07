@@ -1,0 +1,28 @@
+  <%= semantic_form_for @message do |f| %>
+    <%= f.inputs :client, :message_template, :subject, :body %>
+    <%= f.actions :submit %>
+
+    <script type="text/javascript">
+    var templates = <%= templates.to_s.html_safe %>;
+    
+    $("#message_message_template_id").change(function() 
+	{
+          var i = "";
+          i = $("#message_message_template_id").val();
+	  i = i - 1;
+    	  $("#message_subject").val(templates[i].subject);
+    	  $("#message_body").val(templates[i].content);
+	}).trigger('change');
+    </script>
+
+ 
+<h3>Shortcuts</h3> 
+  <pre>
+  <&#37;= @client.firstname %>
+  <&#37;= @client.lastname %>
+  <&#37;= @client.starting_weight %>
+  <&#37;= @client.goal_weight %>
+  <&#37;= @client.starting_bmi %>
+  </pre>
+
+  <% end %>
